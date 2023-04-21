@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">		
+	<!-- 아래 탭의 Namespaces탭에서 mvc, beans, aop등을 체크할수있다. 스키마 -->
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<!-- 이곳에 bean 등록. 설정하는 곳이다. -->
+		<!-- 이곳에 등록된 모든 bean은 실행과동시에 객체생성됨. -->
+		<!-- 하나라도 경로가 잘못되는등의 에러가 발생시, 404 not found를 보임 -->
+		<!-- bean을 하나씩 등록, 설정하면서 어디서 에러가 발생했는지 찾아야됨.  -->
+	
+	<!-- 자바mvc에서 Dbconn클래스와 동일한역할. 여기선 클래스가 bean이 되는것이다. -->
+	<bean id="db" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<!-- 패키지중 Maven Dependencies가 있다. 필요한 드라이버를 자동으로 다운받음. -->
+	<!-- 드라이버가 없다면, pom.xml의 dependency태그를 추가한다. -->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="url" value="jdbc:log4jdbc:oracle:thin://@127.0.0.1:1521:xe"></property>
+		<property name="username" value="system"></property>
+		<property name="password" value="1234"></property>
+	</bean>
+	
+	
+	<!-- 위의 db와 트랜잭션매니저,팩토리 연동 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="db"></property>
+	</bean>
+	
+	
+	<!-- mybatis와 sql서버를 연동해주는 bean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="db"></property>
+		
+		<property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+		<!-- classpath의 root안에있는 mappers폴더의 모든 xml파일. 여기에 쿼리가 등록됨 -->
+		<!-- mappers 패키지 생성필요 -->
+		<property name="configLocation" value="classpath:config/mybatis_config.xml"></property>
+		<!-- mybatis를 사용하기위한 설정파일 -->
+		<!-- config 패키지 생성 -->
+	</bean>
+	<!-- 연동하기위한 bean 끝 -->
+	
+	
+	<!-- 위의 sqlSessionFactory와 연동 -->
+	<!-- sqlSessionFactory의 실행 결과물을 사용하는 bean -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+		<!-- constructor-arg : 생성자태그 -->
+	</bean>
+	
+	<!-- 트랜잭션 기능. @Transaction을 사용하기위해서 필요. -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"></tx:annotation-driven>
+	<!-- 위 행의 왼쪽 아이콘에 마우스를 올리면, 해당 어노테이션이 어디에 적용되어있는지 볼수있음. -->
+	
+	
+	<!-- pom.xml에 aop 추가했으면 aop를 사용하기위해 태그추가 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<!-- 컴포넌트bean 검색범위지정. 에러발생하면 Namespaeces에서 context 체크 -->
+	<context:component-scan base-package="com.myezen.myapp">
+	<!-- 행 왼쪽 아이콘에 마우스를 대보면, 몇개의 컴포넌트bean이 주입되었는지 나타남. -->
+	<!-- 검색범위중 제외할범위 지정. controller는 servlet-context에서 다루고있으므로 제외.-->
+	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+		
+</beans>

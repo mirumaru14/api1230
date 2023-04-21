@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myezen.myapp.persistance.BoardService_Mapper">
+
+<sql id="search">	<!-- 이 쿼리문은 refid가 search인 include태그에 삽입된다. -->
+<if test="searchType !=null and searchType.equals('writer')">	<!-- 검색타입이 작성자인 경우 -->	
+and writer like '%'||#{keyword}||'%'		<!-- || 는 문자열을 합치는 연산자이다. concat은 사용하지않음 -->
+</if>
+<if test="searchType !=null and searchType.equals('subject')">	<!-- 검색타입이 제목인 경우 -->	
+and subject like '%'||#{keyword}||'%'
+</if>
+
+</sql>
+
+
+
+
+
+
+<select id="boardSelectAll" parameterType="scri" resultType="bv">
+
+SELECT * FROM(
+	 		 	SELECT ROWNUM AS rnum, A.* FROM (
+	 		 		SELECT * FROM board1230  WHERE delyn='N' 
+	 		 		<include refid="search"/><!-- 검색기능을 사용할때 쿼리를 집어넣음. 쿼리는 위에 지정 -->
+	 		 		ORDER BY originbidx desc, depth asc) A 
+	 		 		)B WHERE B.rnum BETWEEN ((#{page}-1)*#{perPageNum}+1) AND #{page}*#{perPageNum}
+
+</select>
+
+<select id="boardTotal" parameterType="scri" resultType="int">
+
+select count(*) as cnt from board1230 where delyn='N' <include refid="search"/>
+
+</select>
+
+<update id="boardViewCnt" parameterType="int">
+update board1230 set viewcnt =  NVL(viewcnt,0)+1 where bidx = #{bidx}
+</update>
+
+<select id="boardSelectOne" parameterType="int" resultType="bv">
+select * from board1230 where delyn='N' and bidx=#{bidx}
+</select>
+
+<insert id="boardInsert" parameterType="bv">
+INSERT INTO board1230(bidx,originbidx,depth,level_, subject, contents,writer,ip, midx,pwd,filename)
+VALUES(bidx_seq.nextval,bidx_seq.nextval,0,0,#{subject},#{contents},#{writer},#{ip},#{midx},#{pwd},#{filename})
+</insert>
+
+<update id="boardModify" parameterType="bv">
+update board1230 set subject=#{subject}, contents=#{contents}, writer=#{writer}, filename=#{filename}, midx=#{midx}, ip=#{ip} where bidx=#{bidx} and pwd=#{pwd}
+</update>
+
+<update id="boardDelete" parameterType="bv">
+update board1230 set delyn='Y' where bidx=#{bidx} and pwd=#{pwd}
+</update>
+
+<update id="boardReplyUpdate" parameterType="HashMap">
+<!-- 매개변수의 타입이 2가지이상인 경우 hashmap 사용. -->
+update board1230 set depth =depth+1 where originbidx = #{originbidx} and depth >#{depth}
+
+
+<!-- 타입이 int로 지정되어있을땐, 첫번째 매개변수가 originbidx이므로 #{0}을 사용해야함. -->
+
+</update>
+
+<insert id="boardReplyInsert" parameterType="bv">
+insert into board1230 (bidx, originbidx,depth,level_,subject,contents,writer,ip,midx,pwd,filename)
+values(bidx_seq.nextval,#{originbidx},#{depth}+1,#{level_}+1,#{subject},#{contents},#{writer},#{ip},#{midx},#{pwd},#{filename})
+<!-- 자바에서 했던것처럼 depth와 level은 +1을 해줌 -->
+
+</insert>
+
+
+</mapper>
