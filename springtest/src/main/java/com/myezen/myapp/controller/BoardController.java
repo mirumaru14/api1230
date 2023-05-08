@@ -98,7 +98,7 @@ public class BoardController {
 		//업로드된 파일이름 초기화
 		String uploadedFileName ="";
 		
-		//���������̸��� ���� ��(������ ���� ��)
+		//원본파일이름이 있을 시(파일이 있을 시)
 		if(!file.getOriginalFilename().equals("")) {
 			uploadedFileName = UploadFileUtiles.uploadFile(	//파일 저장하는 메소드 UploadFileUtiles를 보자. 주석 많음.
 					uploadPath, 
