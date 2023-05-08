@@ -38,10 +38,10 @@ public class BoardController {
 	@Autowired		
 	BoardService bs;
 	
-	@Autowired(required=false)		//ÁÖÀÔÀ» ¹ŞÁö ¾Ê¾Æµµ µÇ°Ô²û.
-	PageMaker pm;					//ÆäÀÌÁö¸ŞÀÌÄ¿ ÁÖÀÔ
+	@Autowired(required=false)		//ì£¼ì…ì„ ë°›ì§€ ì•Šì•„ë„ ë˜ê²Œë”.
+	PageMaker pm;					//í˜ì´ì§€ë©”ì´ì»¤ ì£¼ì…
 	
-	@Resource(name="uploadPath")	//Å¸ÀÔÀ¸·Î Ã£´Â Autowired¿Í ´Ş¸® Resource´Â nameÀ¸·Î Ã£´Â´Ù
+	@Resource(name="uploadPath")	//íƒ€ì…ìœ¼ë¡œ ì°¾ëŠ” Autowiredì™€ ë‹¬ë¦¬ ResourceëŠ” nameìœ¼ë¡œ ì°¾ëŠ”ë‹¤.
 	String uploadPath;
 	
 	@RequestMapping(value="/boardList.do")
@@ -93,25 +93,25 @@ public class BoardController {
 		
 		System.out.println("subject:"+subject);
 		MultipartFile file = filename;
-		System.out.println("¿øº»ÆÄÀÏÀÌ¸§ :"+file.getOriginalFilename());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ :"+file.getOriginalFilename());
 		
-		//¾÷·ÎµåµÈ ÆÄÀÏÀÌ¸§ ÃÊ±âÈ­
+		//ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­
 		String uploadedFileName ="";
 		
-		//¿øº»ÆÄÀÏÀÌ¸§ÀÌ ÀÖÀ» ½Ã(ÆÄÀÏÀÌ ÀÖÀ» ½Ã)
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
 		if(!file.getOriginalFilename().equals("")) {
-			uploadedFileName = UploadFileUtiles.uploadFile(	//ÆÄÀÏ ÀúÀåÇÏ´Â ¸Ş¼Òµå UploadFileUtiles¸¦ º¸ÀÚ. ÁÖ¼®¸¹À½.
+			uploadedFileName = UploadFileUtiles.uploadFile(	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼Òµï¿½ UploadFileUtilesï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½.
 					uploadPath, 
 					file.getOriginalFilename(), 
 					file.getBytes());
-			//utilÆú´õ Å¬·¡½ºÆÄÀÏ¿¡ uploadFile¸Ş¼Òµå È£Ãâ. ¸Å°³º¯¼ö´Â °æ·Î, ÆÄÀÏÀÌ¸§, ÆÄÀÏÅ©±â
+			//utilï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ uploadFileï¿½Ş¼Òµï¿½ È£ï¿½ï¿½. ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½
 			
 		}
 		
-		//ÀÌ ip´Â Å¬¶óÀÌ¾ğÆ®ÀÇ ip°¡ ¾Æ´Ñ ¼­¹öipÀÌ´Ù. Å¬¶óÀÌ¾ğÆ®ip´Â °Ë»öÀ»ÅëÇØ¼­ ¾Ë¾Æº¸ÀÚ
+		//ï¿½ï¿½ ipï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ipï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ipï¿½Ì´ï¿½. Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ipï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ë¾Æºï¿½ï¿½ï¿½
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		
-		//¼¼¼ÇÀÇ midx¸¦ ´ëÀÔ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ midxï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int midx=0;
 		if(session.getAttribute("midx")!=null) {
 			midx = (int)session.getAttribute("midx");
@@ -134,7 +134,7 @@ public class BoardController {
 		return "redirect:/board/boardList.do";
 	}
 	
-	//´Ù¸¥À§Ä¡¿¡ ÀÖ´Â ÆÄÀÏµµ ´Ù¿î·Îµå ½ÃÅ³¼ö ÀÖ´Â ¸Ş¼Òµå
+	//ï¿½Ù¸ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Ïµï¿½ ï¿½Ù¿ï¿½Îµï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ş¼Òµï¿½
 	@ResponseBody
 	@RequestMapping(value="/displayFile.do", method=RequestMethod.GET)
 	public ResponseEntity<byte[]> displayFile(String fileName,@RequestParam(value="down",defaultValue="0" ) int down ) throws Exception{
@@ -157,8 +157,8 @@ public class BoardController {
 			
 			if(mType != null){
 				
-				if (down==1) {	//boardcontents¿¡¼­ ÆÄÀÏ´Ù¿î·Îµå ¿µ¿ªÀÇ ¸µÅ©´Â down=1À» ¹Ş¾Æ¿À°Ô µÇ¾îÀÖÀ½.
-					//down=1 °ªÀ» ¹Ş¾Æ¿À°ÔµÇ¸é ¾Æ·¡ ¸Ş¼Òµå¸¦ ÅëÇØ ´Ù¿î·Îµå°¡ ½ÇÇàµÊ
+				if (down==1) {	//boardcontentsï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´Ù¿ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ down=1ï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½.
+					//down=1 ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ï¿½ÔµÇ¸ï¿½ ï¿½Æ·ï¿½ ï¿½Ş¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½Îµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½
 					fileName = fileName.substring(fileName.indexOf("_")+1);
 					headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 					headers.add("Content-Disposition", "attachment; filename=\""+
@@ -210,22 +210,22 @@ public class BoardController {
 		
 		System.out.println("subject:"+subject);
 		MultipartFile file = filename;
-		System.out.println("¿øº»ÆÄÀÏÀÌ¸§ :"+file.getOriginalFilename());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ :"+file.getOriginalFilename());
 		
-		//¾÷·ÎµåµÈ ÆÄÀÏÀÌ¸§ ÃÊ±âÈ­
+		//ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­
 		String uploadedFileName ="";
 		
-		//¿øº»ÆÄÀÏÀÌ¸§ÀÌ ÀÖÀ» ½Ã(ÆÄÀÏÀÌ ÀÖÀ» ½Ã)
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
 		if(!file.getOriginalFilename().equals("")) {
-			uploadedFileName = UploadFileUtiles.uploadFile(	//ÆÄÀÏ ÀúÀåÇÏ´Â ¸Ş¼Òµå UploadFileUtiles¸¦ º¸ÀÚ. ÁÖ¼®¸¹À½.
+			uploadedFileName = UploadFileUtiles.uploadFile(	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼Òµï¿½ UploadFileUtilesï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½.
 					uploadPath, 
 					file.getOriginalFilename(), 
 					file.getBytes());
-			//utilÆú´õ Å¬·¡½ºÆÄÀÏ¿¡ uploadFile¸Ş¼Òµå È£Ãâ. ¸Å°³º¯¼ö´Â °æ·Î, ÆÄÀÏÀÌ¸§, ÆÄÀÏÅ©±â
+			//utilï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ uploadFileï¿½Ş¼Òµï¿½ È£ï¿½ï¿½. ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½
 			
 		}
 		
-		//ÀÌ ip´Â Å¬¶óÀÌ¾ğÆ®ÀÇ ip°¡ ¾Æ´Ñ ¼­¹öipÀÌ´Ù. Å¬¶óÀÌ¾ğÆ®ip´Â °Ë»öÀ»ÅëÇØ¼­ ¾Ë¾Æº¸ÀÚ
+		//ï¿½ï¿½ ipï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ipï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ipï¿½Ì´ï¿½. Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ipï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ë¾Æºï¿½ï¿½ï¿½
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		
 		int midx=0;
@@ -325,22 +325,22 @@ public class BoardController {
 		
 		
 		MultipartFile file = filename;
-		System.out.println("¿øº»ÆÄÀÏÀÌ¸§ :"+file.getOriginalFilename());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ :"+file.getOriginalFilename());
 		
-		//¾÷·ÎµåµÈ ÆÄÀÏÀÌ¸§ ÃÊ±âÈ­
+		//ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­
 		String uploadedFileName ="";
 		
-		//¿øº»ÆÄÀÏÀÌ¸§ÀÌ ÀÖÀ» ½Ã(ÆÄÀÏÀÌ ÀÖÀ» ½Ã)
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
 		if(!file.getOriginalFilename().equals("")) {
-			uploadedFileName = UploadFileUtiles.uploadFile(	//ÆÄÀÏ ÀúÀåÇÏ´Â ¸Ş¼Òµå UploadFileUtiles¸¦ º¸ÀÚ. ÁÖ¼®¸¹À½.
+			uploadedFileName = UploadFileUtiles.uploadFile(	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼Òµï¿½ UploadFileUtilesï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ö¼ï¿½ï¿½ï¿½ï¿½ï¿½.
 					uploadPath, 
 					file.getOriginalFilename(), 
 					file.getBytes());
-			//utilÆú´õ Å¬·¡½ºÆÄÀÏ¿¡ uploadFile¸Ş¼Òµå È£Ãâ. ¸Å°³º¯¼ö´Â °æ·Î, ÆÄÀÏÀÌ¸§, ÆÄÀÏÅ©±â
+			//utilï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ uploadFileï¿½Ş¼Òµï¿½ È£ï¿½ï¿½. ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½
 			
 		}
 		
-		//ÀÌ ip´Â Å¬¶óÀÌ¾ğÆ®ÀÇ ip°¡ ¾Æ´Ñ ¼­¹öipÀÌ´Ù. Å¬¶óÀÌ¾ğÆ®ip´Â °Ë»öÀ»ÅëÇØ¼­ ¾Ë¾Æº¸ÀÚ
+		//ï¿½ï¿½ ipï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ipï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ipï¿½Ì´ï¿½. Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ipï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ë¾Æºï¿½ï¿½ï¿½
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		
 		int midx=0;
