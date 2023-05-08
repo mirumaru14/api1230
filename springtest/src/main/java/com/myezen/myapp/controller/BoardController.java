@@ -95,23 +95,23 @@ public class BoardController {
 		MultipartFile file = filename;
 		System.out.println("���������̸� :"+file.getOriginalFilename());
 		
-		//���ε�� �����̸� �ʱ�ȭ
+		//업로드된 파일이름 초기화
 		String uploadedFileName ="";
 		
 		//���������̸��� ���� ��(������ ���� ��)
 		if(!file.getOriginalFilename().equals("")) {
-			uploadedFileName = UploadFileUtiles.uploadFile(	//���� �����ϴ� �޼ҵ� UploadFileUtiles�� ����. �ּ�����.
+			uploadedFileName = UploadFileUtiles.uploadFile(	//파일 저장하는 메소드 UploadFileUtiles를 보자. 주석 많음.
 					uploadPath, 
 					file.getOriginalFilename(), 
 					file.getBytes());
-			//util���� Ŭ�������Ͽ� uploadFile�޼ҵ� ȣ��. �Ű������� ���, �����̸�, ����ũ��
+			//util폴더 클래스파일에 uploadFile메소드 호출. 매개변수는 경로, 파일이름, 파일크기
 			
 		}
 		
-		//�� ip�� Ŭ���̾�Ʈ�� ip�� �ƴ� ����ip�̴�. Ŭ���̾�Ʈip�� �˻������ؼ� �˾ƺ���
+		//이 ip는 클라이언트의 ip가 아닌 서버ip이다. 클라이언트ip는 검색을통해서 알아보자
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		
-		//������ midx�� ����
+		//세션의 midx를 대입
 		int midx=0;
 		if(session.getAttribute("midx")!=null) {
 			midx = (int)session.getAttribute("midx");
@@ -134,7 +134,7 @@ public class BoardController {
 		return "redirect:/board/boardList.do";
 	}
 	
-	//�ٸ���ġ�� �ִ� ���ϵ� �ٿ�ε� ��ų�� �ִ� �޼ҵ�
+	//다른 위치에 있는 파일도 다운로드 시킬 수 있는 메소드
 	@ResponseBody
 	@RequestMapping(value="/displayFile.do", method=RequestMethod.GET)
 	public ResponseEntity<byte[]> displayFile(String fileName,@RequestParam(value="down",defaultValue="0" ) int down ) throws Exception{
@@ -157,8 +157,8 @@ public class BoardController {
 			
 			if(mType != null){
 				
-				if (down==1) {	//boardcontents���� ���ϴٿ�ε� ������ ��ũ�� down=1�� �޾ƿ��� �Ǿ�����.
-					//down=1 ���� �޾ƿ��ԵǸ� �Ʒ� �޼ҵ带 ���� �ٿ�ε尡 �����
+				if (down==1) {	//boardcontents에서 파일다운로드 영역의 링크는 down=1을 받아오게 되어있음.
+					//down=1  값을 받아오게되면 아래 메소드를 통해 다운로드가 실행됨.
 					fileName = fileName.substring(fileName.indexOf("_")+1);
 					headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 					headers.add("Content-Disposition", "attachment; filename=\""+
@@ -212,20 +212,20 @@ public class BoardController {
 		MultipartFile file = filename;
 		System.out.println("���������̸� :"+file.getOriginalFilename());
 		
-		//���ε�� �����̸� �ʱ�ȭ
+		
 		String uploadedFileName ="";
 		
-		//���������̸��� ���� ��(������ ���� ��)
+		//원본파일이름이 있을 시(파일이 있을 시)
 		if(!file.getOriginalFilename().equals("")) {
-			uploadedFileName = UploadFileUtiles.uploadFile(	//���� �����ϴ� �޼ҵ� UploadFileUtiles�� ����. �ּ�����.
+			uploadedFileName = UploadFileUtiles.uploadFile(
 					uploadPath, 
 					file.getOriginalFilename(), 
 					file.getBytes());
-			//util���� Ŭ�������Ͽ� uploadFile�޼ҵ� ȣ��. �Ű������� ���, �����̸�, ����ũ��
+			
 			
 		}
 		
-		//�� ip�� Ŭ���̾�Ʈ�� ip�� �ƴ� ����ip�̴�. Ŭ���̾�Ʈip�� �˻������ؼ� �˾ƺ���
+		
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		
 		int midx=0;
@@ -327,20 +327,20 @@ public class BoardController {
 		MultipartFile file = filename;
 		System.out.println("���������̸� :"+file.getOriginalFilename());
 		
-		//���ε�� �����̸� �ʱ�ȭ
+		
 		String uploadedFileName ="";
 		
-		//���������̸��� ���� ��(������ ���� ��)
+		
 		if(!file.getOriginalFilename().equals("")) {
-			uploadedFileName = UploadFileUtiles.uploadFile(	//���� �����ϴ� �޼ҵ� UploadFileUtiles�� ����. �ּ�����.
+			uploadedFileName = UploadFileUtiles.uploadFile(	
 					uploadPath, 
 					file.getOriginalFilename(), 
 					file.getBytes());
-			//util���� Ŭ�������Ͽ� uploadFile�޼ҵ� ȣ��. �Ű������� ���, �����̸�, ����ũ��
+			
 			
 		}
 		
-		//�� ip�� Ŭ���̾�Ʈ�� ip�� �ƴ� ����ip�̴�. Ŭ���̾�Ʈip�� �˻������ؼ� �˾ƺ���
+		
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		
 		int midx=0;
