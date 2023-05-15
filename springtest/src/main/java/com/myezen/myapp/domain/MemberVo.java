@@ -1,5 +1,5 @@
 package com.myezen.myapp.domain;
-							//Value Object  °ªÀ» ´ã´Â °´Ã¼ (DTO)
+							//Value Object  ê°’ì„ ë‹´ëŠ” ê°ì²´ (DTO)
 public class MemberVo {
 
 	private int midx;

@@ -19,27 +19,27 @@ import com.myezen.myapp.service.MemberService;
 
 @Controller
 @RequestMapping(value="/member")
-public class MemberController {		//°æ·Î°ªÀÌ /memberÀÌ¸é ÀÌ °´Ã¼ »ı¼º
+public class MemberController {		//ê²½ë¡œê°’ì´ /memberì´ë©´ ì´ ê°ì²´ ìƒì„±
 	
 	
-	@Autowired 	//°´Ã¼ÀÇ Å¸ÀÔÀÌ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ. ÀÏÄ¡ÇÏ¸é °´Ã¼¸¦ ÀÚµ¿À¸·Î ÁÖÀÔ. beanÀ¸·Î µî·ÏÇÑ °´Ã¼ÁÖÀÔ
+	@Autowired 	//ê°ì²´ì˜ íƒ€ì…ì´ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸. ì¼ì¹˜í•˜ë©´ ê°ì²´ë¥¼ ìë™ìœ¼ë¡œ ì£¼ì…. beanìœ¼ë¡œ ë“±ë¡í•œ ê°ì²´ ì£¼ì…
 	MemberService ms;
-	//
+	
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@RequestMapping(value="/memberJoin.do")	
-	public String memberJoin() {	//°æ·Î°ªÀÌ /member/memberJoin.do ÀÌ¸é ÀÌ ¸Ş¼Òµå ½ÇÇà
+	public String memberJoin() {	//ê²½ë¡œê°’ì´ /member/memberJoin.do ì´ë©´ ì´ ë©”ì†Œë“œ ì‹¤í–‰
 		
 		
 		
-		return "member/memberJoin";	//  WEB-INF/views/member/memberJoin.jsp   °æ·ÎÁß views/ ( ¿©±â ).jsp
-		// /member/memberJoin.do°æ·Î¿¡ µé¾î°¡°ÔµÇ¸é, WEB-INF/views/member/memberJoin.jspÀ» º¸¿©ÁØ´Ù.				
+		return "member/memberJoin";	//  WEB-INF/views/member/memberJoin.jsp  ê²½ë¡œì¤‘ views/ ( ì—¬ê¸° ).jsp
+		// /member/memberJoin.doê²½ë¡œì— ë“¤ì–´ê°€ê²Œ ë˜ë©´, WEB-INF/views/member/memberJoin.jspë¥¼ ë³´ì—¬ì¤€ë‹¤.			
 	}
 	
 	@RequestMapping(value="/memberJoinAction.do")
-	public String memberJoinAction(		//¸Å°³º¯¼ö ºÎºĞ¿¡ @RequestParamÅ¬·¡½º »ç¿ë.
+	public String memberJoinAction(		//ë§¤ê°œë³€ìˆ˜ ë¶€ë¶„ì— @RequestParamí´ë˜ìŠ¤ ì‚¬ìš©.
 			@RequestParam("memberId") String memberId,
 			@RequestParam("memberPwd") String memberPwd,
 			@RequestParam("memberName") String memberName,
@@ -50,15 +50,15 @@ public class MemberController {		//°æ·Î°ªÀÌ /memberÀÌ¸é ÀÌ °´Ã¼ »ı¼º
 			@RequestParam("memberBirth") String memberBirth
 			) {
 		
-		//È¸¿øÀÇ ÆĞ½º¿öµå¸¦ ¾ÏÈ£È­. ¾ÏÈ£È­ ÇÑ ÆĞ½º¿öµå´Â memberPwd2
+		//íšŒì›ì˜ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì•”í˜¸í™”. ì•”í˜¸í™” í•œ íŒ¨ìŠ¤ì›Œë“œëŠ” memberPwd2
 		String memberPwd2 = bcryptPasswordEncoder.encode(memberPwd);
 				
-		// ÀÚ¹Ù»ó¿¡¼­´Â MemberDao¸¦ °´Ã¼»ı¼º½ÃÅ°Áö¸¸ SpringÀº ´Ù¸£°Ô ÁøÇà.
-		// 15~16ÇàÀÇ @Autowired MemberService
+		// ìë°”ìƒì—ì„œëŠ” MemberDaoë¥¼ ê°ì²´ìƒì„±ì‹œí‚¤ì§€ë§Œ Springì€ ë‹¤ë¥´ê²Œ ì§„í–‰.
+		// 15~16í–‰ì˜ @Autowired memberService
 		int value = ms.memberInsert(memberId, memberPwd2, memberName, memberPhone, memberEmail, memberGender, memberAddr, memberBirth);
 		
 		
-		return "redirect:/";		//root·Î º¸³»¸é ÀÚµ¿À¸·Î index.jsp·Î º¸³»Áö°ÔµÊ
+		return "redirect:/";		//rootë¡œ ë³´ë‚´ë©´ ìë™ìœ¼ë¡œ index.jspë¡œ ë³´ë‚´ì§€ê²Œë¨
 	}
 	
 	
@@ -73,7 +73,7 @@ public class MemberController {		//°æ·Î°ªÀÌ /memberÀÌ¸é ÀÌ °´Ã¼ »ı¼º
 	}
 	
 	
-	@ResponseBody	//°´Ã¼¸¦ ¸®ÅÏÇØ¾ßÇÏ¹Ç·Î ResponseBody¸¦ »ç¿ë
+	@ResponseBody	//ê°ì²´ë¥¼ ë¦¬í„´í•´ì•¼í•˜ë¯€ë¡œ ResponseBodyë¥¼ ì‚¬ìš©
 	@RequestMapping(value="/memberIdCheck.do")
 	public String memberIdCheck(@RequestParam("memberId") String memberId) {
 		
@@ -82,7 +82,7 @@ public class MemberController {		//°æ·Î°ªÀÌ /memberÀÌ¸é ÀÌ °´Ã¼ »ı¼º
 		
 		value = ms.memberIdCheck(memberId);
 		
-		//json ÆÄÀÏ ÇüÅÂ·Î º¸³»¾ßÇÔ (°´Ã¼)
+		//json íŒŒì¼ í˜•íƒœë¡œ ë³´ë‚´ì•¼í•¨ (ê°ì²´)
 		str = "{\"value\": \""+value+"\"}";
 		
 		return str;
@@ -98,23 +98,23 @@ public class MemberController {		//°æ·Î°ªÀÌ /memberÀÌ¸é ÀÌ °´Ã¼ »ı¼º
 	public String memberLoginAction(
 			@RequestParam("memberId") String memberId,
 			@RequestParam("memberPwd") String memberPwd,
-			HttpSession session,		//¸Å°³º¯¼ö¿¡ ¼¼¼Ç
-			RedirectAttributes rttr		//¸ğµ¨Å¬·¡½º. 1È¸¼º±â´É
+			HttpSession session,		//ë§¤ê°œë³€ìˆ˜ì— ì„¸ì…˜
+			RedirectAttributes rttr		//ëª¨ë¸í´ë˜ìŠ¤. 1íšŒì„±ê¸°ëŠ¥
 			) {
 		
 		MemberVo mv = ms.memberLogin(memberId);		
 		
-		//°æ·Î. »ç¿ëÇÒ º¯¼ö¸¸ ¼±¾ğ
+		//ê²½ë¡œ. ì‚¬ìš©í•  ë³€ìˆ˜ë§Œ ì„ ì–¸
 		String path="";
 		
-		//È¸¿øÀÇ ÆĞ½º¿öµå´Â ¾ÏÈ£È­µÇ¾îÀÖÀ½.
-		//·Î±×ÀÎÃ¢¿¡ ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£ memberPwd¿Í db»ó¿¡ µî·ÏµÈ ¾ÏÈ£È­µÈ ÆĞ½º¿öµå¸¦ ´ëÁ¶
+		//íšŒì›ì˜ íŒ¨ìŠ¤ì›Œë“œëŠ” ì•”í˜¸í™”ë˜ì–´ìˆìŒ.
+		//ë¡œê·¸ì¸ì°½ì— ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ memberPwdì™€ dbìƒì— ë“±ë¡ëœ ì•”í˜¸í™”ëœ íŒ¨ìŠ¤ì›Œë“œë¥¼ ëŒ€ì¡°
 		
 		if(mv!=null && bcryptPasswordEncoder.matches(memberPwd, mv.getMemberpwd())) {
 			
-			//ÄÁÆ®·Ñ·¯¿¡¼­ ¼¼¼Ç±â´ÉÀ» ¾²´Â°ÍÀº ÁÁÁö¾Ê´Ù. ¼¼¼ÇÀº ÀÎÅÍ¼ÁÅÍ¿¡°Ô ¸Ã±è.
-			//ÀÎÅÍ¼ÁÅÍ°¡ ²¨³» ¾µ ¼ö ÀÖµµ·Ï rttr Áï ¸ğµ¨¿¡ midx¿Í memberNameÀ» ´ãÀ½.
-			//ÀÎÅÍ¼ÁÅÍ´Â ¿©±â¿¡ ´ã±ä ¸ğµ¨µéÀ» ²¨³»¼­ ¼¼¼Ç¿¡ ´Ù½Ã ¿Å°Ü´ãÀ»°ÍÀÓ.
+			//ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ì„¸ì…˜ê¸°ëŠ¥ì„ ì“°ëŠ”ê²ƒì€ ì¢‹ì§€ì•Šë‹¤. ì„¸ì…˜ì€ ì¸í„°ì…‰í„°ì—ê²Œ ë§¡ê¹€.
+			//ì¸í„°ì…‰í„°ê°€ êº¼ë‚´ ì“¸ ìˆ˜ ìˆë„ë¡ rttr ì¦‰ ëª¨ë¸ì— midxì™€ memberNameì„ ë‹´ìŒ.
+			//ì¸í„°ì…‰í„°ëŠ” ì—¬ê¸°ì— ë‹´ê¸´ ëª¨ë¸ë“¤ì„ êº¼ë‚´ì„œ ì„¸ì…˜ì— ë‹¤ì‹œ ì˜®ê²¨ë‹´ì„ê²ƒì„.
 			rttr.addAttribute("midx", mv.getMidx());
 			rttr.addAttribute("memberName", mv.getMembername());
 						
@@ -122,15 +122,15 @@ public class MemberController {		//°æ·Î°ªÀÌ /memberÀÌ¸é ÀÌ °´Ã¼ »ı¼º
 				path="redirect:/";
 			}else{
 				String dest = (String)session.getAttribute("dest");
-				//ÀÎÅÍ¼ÁÅÍ¸¦ÅëÇØ ¼¼¼Ç¿¡ dest¶ó´Â ÀÌ¸§À¸·Î °æ·Î¸¦ ÀúÀåÇßÀ½. ÀÌ °æ·Î¸¦ °¡Á®¿È.
+				//ì¸í„°ì…‰í„°ë¥¼í†µí•´ ì„¸ì…˜ì— destë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ê²½ë¡œë¥¼ ì €ì¥í–ˆìŒ. ì´ ê²½ë¡œë¥¼ ê°€ì ¸ì˜´.
 				path="redirect:"+dest;
-				//°¡Á®¿Â °æ·Î´Â contextPath°¡ ¾ø¾î¾ßµÊ. ÀÎÅÍ¼ÁÅÍ¿¡¼­ ¹Ì¸® ¾ø¾Öµ×À½.
+				//ê°€ì ¸ì˜¨ ê²½ë¡œëŠ” contextPathê°€ ì—†ì–´ì•¼ë¨. ì¸í„°ì…‰í„°ì—ì„œ ë¯¸ë¦¬ ì—†ì• ë’€ìŒ.
 			}			
-			//·Î±×ÀÎ ¼º°ø½Ã Àü¿¡ ÀÖ´ø È­¸éÀ¸·Î.
+			//ë¡œê·¸ì¸ ì„±ê³µì‹œ ì „ì— ìˆë˜ í™”ë©´ìœ¼ë¡œ.
 		}else {
-			rttr.addFlashAttribute("msg", "¾ÆÀÌµğ È¤Àº ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä"); //1È¸¼º ¸Ş¼Òµå
+			rttr.addFlashAttribute("msg", "ì•„ì´ë”” í˜¹ì€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”"); //1íšŒì„± ë©”ì†Œë“œ
 			path="redirect:/member/memberLogin.do";
-			//·Î±×ÀÎ ½ÇÆĞ½Ã ´Ù½Ã ·Î±×ÀÎÃ¢À¸·Î
+			//ë¡œê·¸ì¸ ì‹¤íŒ¨ì‹œ ë‹¤ì‹œ ë¡œê·¸ì¸ì°½ìœ¼ë¡œ
 		}
 		
 		return path;

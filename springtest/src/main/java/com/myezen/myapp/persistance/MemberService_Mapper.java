@@ -9,7 +9,7 @@ import com.myezen.myapp.domain.MemberVo;
 
 public interface MemberService_Mapper {
 	
-	//¸¶ÀÌ¹ÙÆ¼½ºÀÇ »ç¿ëÇÒ ¸Ş¼Òµå¸¦ Á¤ÀÇÇÑ´Ù
+	//ë§ˆì´ë°”í‹°ìŠ¤ì˜ ì‚¬ìš©í•  ë©”ì†Œë“œë¥¼ ì •ì˜í•œë‹¤.
 	
 	//public MemberVo memberLogin(String id, String pwd);
 	

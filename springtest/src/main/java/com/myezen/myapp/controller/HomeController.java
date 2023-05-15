@@ -11,18 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/* @(Annotation)ÀÌ¶õ
- * ÀÚ¹Ù¼Ò½ºÄÚµå¿¡ Ãß°¡ÇÏ¿© »ç¿ëÇÒ ¼ö ÀÖ´Â ¸ŞÅ¸µ¥ÀÌÅÍÀÇ ÀÏÁ¾.
- * bean ÁÖÀÔ È¤Àº getter setter ÀÚµ¿»ı¼º µî 
- * Æ¯º°ÇÑ ÀÇ¹Ì¸¦ ºÎ¿©ÇÏ°Å³ª ±â´ÉºÎ¿© µî ´Ù¾çÇÑ ¿ªÇÒÀ» ¼öÇà.
- * ¿¹½Ã : xmlÆÄÀÏ¿¡ Á÷Á¢ ½á¼­ beanÀ¸·Î µî·ÏÇÏ´Â°ÍÀÌ ¾Æ´Ñ, @Component¸¦ »ç¿ëÇØ¼­ beanÀ» µî·ÏÇÒ ¼öµµ ÀÖ´Ù.
+/* @(Annotation)ì´ë€
+ * ìë°”ì†ŒìŠ¤ì½”ë“œì— ì¶”ê°€í•˜ì—¬ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ë©”íƒ€ë°ì´í„°ì˜ ì¼ì¢….
+ * bean ì£¼ì… í˜¹ì€ getter setter ìë™ìƒì„± ë“±
+ * íŠ¹ë³„í•œ ì˜ë¯¸ë¥¼ ë¶€ì—¬í•˜ê±°ë‚˜ ê¸°ëŠ¥ë¶€ì—¬ ë“± ë‹¤ì–‘í•œ ì—­í• ì„ ìˆ˜í–‰.
+ * ì˜ˆì‹œ : xmlíŒŒì¼ì— ì§ì ‘ ì¨ì„œ beanìœ¼ë¡œ ë“±ë¡í•˜ëŠ”ê²ƒì´ ì•„ë‹Œ, @Componentë¥¼ ì‚¬ìš©í•´ì„œ beanì„ ë“±ë¡í•  ìˆ˜ë„ ìˆë‹¤.
  * 
- * ½ºÇÁ¸µÀÇ @ ±â´ÉÀ» º¸°í½Í´Ù¸é ¾Æ·¡ÀÇ ¸µÅ©.
+ * ìŠ¤í”„ë§ì˜ @ ê¸°ëŠ¥ì„ ë³´ê³ ì‹¶ë‹¤ë©´ ì•„ë˜ì˜ ë§í¬.
  * https://melonicedlatte.com/2021/07/18/182600.html
  * */
 
 
-@Controller //controller¿ëµµÀÇ beanÀ¸·Î µî·Ï. controller¿ëµµ·Î °´Ã¼»ı¼ºÀ» ¿äÃ».
+@Controller //controllerìš©ë„ì˜ beanìœ¼ë¡œ ë“±ë¡. controllerìš©ë„ë¡œ ê°ì²´ìƒì„±ì„ ìš”ì²­.
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -30,11 +30,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	
-	/* @RequestMapping : °¡»ó°æ·Î¿Í ¸Ş¼Òµå¸¦ °áÇÕ½ÃÅ°´Â Å¬·¡½º
-	 * uri°ªÀÌ "/" ÀÌ¸é, ¾Æ·¡ÀÇ Å¬·¡½º¸¦ ½ÇÇàÇÑ´Ù´Â ¶æ.
-	 * Å¬·¡½ºÀÇ ¿ëµµ¿¡ µû¶ó value¿¡ board³ª memberµîÀ» Áı¾î³ÖÀ¸¸é µÈ´Ù.
-	 * @controller¾È¿¡ ÀÖÀ¸¹Ç·Î controllerÀÇ ¿ªÇÒÀ» ÇÏ´Â °´Ã¼.
-	 * ¸ğµ¨ : setAttribute ¿Í ºñ½ÁÇÔ.	 
+	/* @RequestMapping : ê°€ìƒê²½ë¡œì™€ ë©”ì†Œë“œë¥¼ ê²°í•©ì‹œí‚¤ëŠ” í´ë˜ìŠ¤
+	 * uriê°’ì´ "/" ì´ë©´, ì•„ë˜ì˜ í´ë˜ìŠ¤ë¥¼ ì‹¤í–‰í•œë‹¤ëŠ” ëœ».
+	 * í´ë˜ìŠ¤ì˜ ìš©ë„ì— ë”°ë¼ valueì— boardë‚˜ memberë“±ì„ ì§‘ì–´ë„£ìœ¼ë©´ ëœë‹¤.
+	 * @controllerì•ˆì— ìˆìœ¼ë¯€ë¡œ controllerì˜ ì—­í• ì„ í•˜ëŠ” ê°ì²´.
+	 * ëª¨ë¸ : setAtrributeì™€ ë¹„ìŠ·í•¨.
 	 * */
 	
 	

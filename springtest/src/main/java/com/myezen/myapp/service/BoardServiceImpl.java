@@ -13,7 +13,7 @@ import com.myezen.myapp.domain.SearchCriteria;
 import com.myezen.myapp.persistance.BoardService_Mapper;
 
 
-@Service("boardServiceImpl") //ÀÌ ¾î³ëÅ×ÀÌ¼ÇÀÌ ¾øÀ¸¸é °´Ã¼»ı¼ºÀÌ µÇÁö¾ÊÀ½.
+@Service("boardServiceImpl") //ì´ ì–´ë…¸í…Œì´ì…˜ì´ ì—†ìœ¼ë©´ ê°ì²´ìƒì„±ì´ ë˜ì§€ì•ŠìŒ.
 public class BoardServiceImpl implements BoardService{
 	
 	
@@ -96,11 +96,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
-	@Transactional	//´ä±Û±â´É¿¡´Â 2°³ÀÇ Äõ¸®°¡ ÀüºÎ ½ÇÇàµÇ¾î¾ßÇÑ´Ù. Æ®·£Àè¼Ç ±â´ÉÀÌ ÇÊ¿ä
+	@Transactional	//ë‹µê¸€ê¸°ëŠ¥ì—ëŠ” 2ê°œì˜ ì¿¼ë¦¬ê°€ ì „ë¶€ ì‹¤í–‰ë˜ì–´ì•¼í•œë‹¤. íŠ¸ëœì­ì…˜ ê¸°ëŠ¥ì´ í•„ìš”
 	@Override
 	public int boardReply(BoardVo bv) {
 		
-		//HashMap »ç¿ëÇØº¸ÀÚ
+		//HashMap ì‚¬ìš©í•´ë³´ì
 		HashMap<String,Integer> hm = new HashMap<String,Integer>();
 		hm.put("originbidx", bv.getOriginbidx());
 		hm.put("depth", bv.getDepth());

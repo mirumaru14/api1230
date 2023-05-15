@@ -12,46 +12,46 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class BoardTimeCheckAdvice {
-	//�ɸ��� �ð��� üũ�ϴ� �����̽�
+	//걸리는 시간을 체크하는 어드바이스
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardTimeCheckAdvice.class);
 	
 	@Around("execution(* com.myezen.myapp.service.BoardService*.*(..))")
-	//�յڷν���	
+	//앞뒤로 실행
 	public Object timelog(ProceedingJoinPoint pjp) throws Throwable {
-		//ProceedingJoinPoint : Ÿ�ٸ޼ҵ�(�����Ͻ��޼ҵ�) �� ������ ��� Ŭ����.
-		//pjp : �� Ŭ������ ����. �ش� �޼ҵ带 �����Ű�ų�, �޼ҵ��� �̸� �ּҵ��� �̾Ƴ�������.
+		//ProceedingJoinPoint : 타겟메소드(비지니스메소드)의 정보를 담는 클래스
+		//pjp : 그 클래스의 변수. 해당 메소드를 짆애시키거나, 메소드의 이름 주소등을 뽑아낼 수 있음.
 		
 		Object result;
 		
 		logger.info("before AOP");
 		logger.info(Arrays.toString(pjp.getArgs()));
-		//Ÿ�� �޼ҵ��� �ּ� ���
+		//타겟 메소드의 주소 출력
 		
 		long startTime = System.currentTimeMillis();
-		//���۽ð�
+		//시작시간
 		
-		//�߿�!
-		//around �����̽� �޼ҵ尡 ����Ǹ�, Ÿ���� �����Ͻ� �޼ҵ�(BoardService)��
-		//��������ʴ´�.  around�����̽� �޼ҵ尡 �����Ͻ� �޼ҵ��� ȣ���� ����ë�� ����.
-		//pjp.proceed�� �� �����Ͻ� �޼ҵ带 �����ϵ��� �Ѵ�.
-		//��, around�����̽� �޼ҵ忡�� pjp.proceed�� ������������ ���� �����̽��� ����Ǵٰ�
-		//pjp.proceed�� ������ �����Ͻ� �޼ҵ尡 ����ǰ�, ������ ������ proceed������ �ڵ尡 ����ȴ�.
+		//중요!
+		//around 어드바이스 메소드가 실행되면, 타겟인 비지니스 메소드(BoradService)는
+		//실행되지 않는다. around 어드바이스 메소드가 비지니스 메소드의 호출을 가로챘기 때문.
+		//pjp.proceed는 그 비지니스 메소드를 진행하도록 한다.
+		//즉, around어드바이스 메소드에서 pjp.proceed가 나오기전까지 먼저 어드바이스가 실행되다가
+		//pjp.proceed가 나오면 비지니스 메소드가 진행되고, 진행이 끝나면 proceed이후의 코드가 진행된다.
 		result = pjp.proceed();
-		//�� �ڵ带 �б������� �����Ͻ� �޼ҵ� ȣ�� ���� �İ� ������.
-		//�����Ͻ� �޼ҵ尡 ����� �ڿ��� ObjectŸ���� result�� �����Ͻ� �޼ҵ��� ��������� ����.
-		//around�����̽� �޼ҵ尡 ����Ǹ� result�� return�ϰ�,
-		//�� ������ Controller�� �������Եȴ�. Controller���� ȣ���� ���̴�.
+		//위 코드를 분기점으로 비지니스 메소드 호출 전과 후가 나뉜다.
+		//비지니스 메소드가 진행된 뒤에는 Object타입의 result에 비지니스 메소드의 결과값들이 담긴다.
+		//around어드바이스 메소드가 종료되면 result를 return하고,
+		//이 값들을 Controller로 가져가게 된다. Controller에서 호출한 값이다.
 		
 		long endTime = System.currentTimeMillis();
-		//�����½ð�
+		//끝나는 시간
 		
 		logger.info("After AOP");
 		logger.info(pjp.getSignature().getName()+":"+(endTime-startTime));
-		//pjp.getSignature().getName() : Ÿ�� �޼ҵ��� �̸�
-		//endTime - startTime = �ɸ��ð�.
-		//��, Ÿ�ٸ޼ҵ尡 �Ϸ�Ǵµ��� �ɸ� �ð��� ����.
-		logger.info("------time log ��------");
+		//pjp.getSignature().getName() : 타겟 메소드의 이름
+		//endTime - startTime = 걸린 시간.
+		//즉, 타겟메소드가 완료되는데에 걸린 시간을 뜻함.
+		logger.info("------time log 끝------");
 		return result;
 	}
 	

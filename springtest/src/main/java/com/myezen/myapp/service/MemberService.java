@@ -6,10 +6,10 @@ import com.myezen.myapp.domain.MemberVo;
 
 public interface MemberService {
 	
-	//ÀÚ¹Ù mvc¿¡¼­´Â ÀÌ°÷¿¡ MemberDao Å¬·¡½º¸¦ ¸¸µé¾úÁö¸¸, ½ºÇÁ¸µ¿¡¼­´Â ÀÎÅÍÆäÀÌ½º¸¦ ¸¸µç´Ù 
+	//ìë°” mvcì—ì„œëŠ” ì´ê³³ì— MemberDao í´ë˜ìŠ¤ë¥¼ ë§Œë“¤ì—ˆì§€ë§Œ, ìŠ¤í”„ë§ì—ì„œëŠ” ì¸í„°í˜ì´ìŠ¤ë¥¼ ë§Œë“ ë‹¤.
 	
 	public int memberInsert(String memberId, String memberPwd, String memberName, String memberPhone, String memberEmail, String memberGender, String memberAddr, String memberBirth);
-	//ÀÌ°÷Àº ¸Ş¼Òµå¸¸ ¸¸µé°í, ¸Ş¼ÒµåÀÇ ±¸ÇöÀº MemberServiceImpl¿¡ ÇÑ´Ù.
+	//ì´ê³³ì€ ë©”ì†Œë“œë§Œ ë§Œë“¤ê³ , ë©”ì†Œë“œì˜ êµ¬í˜„ã…‡ëŠ MemberServiceImplì— í•œë‹¤.
 	
 	public ArrayList<MemberVo> memberList();
 	

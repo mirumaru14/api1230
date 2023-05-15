@@ -22,8 +22,8 @@ public interface BoardService_Mapper {
 	
 	public int boardDelete(BoardVo bv);
 	
-	//´ä±Û±â´É¿¡´Â 2°³ÀÇ Äõ¸®°¡ ÀÛµ¿ÇØ¾ßÇÑ´Ù. ±×·¯¹Ç·Î mapperÀÇ ¸Ş¼Òµå ¶ÇÇÑ 2°³¸¦ ÀÛ¼ºÇÑ´Ù.
-	//updateÄõ¸®¿¡´Â originbidx¿Í depth¸¦ ¹Ş´Â Äõ¸®¹®
+	//ë‹µê¸€ê¸°ëŠ¥ì—ëŠ” 2ê°œì˜ ì¿¼ë¦¬ê°€ ì‘ë™í•´ì•¼í•œë‹¤. ê·¸ëŸ¬ë¯€ë¡œ mapperì˜ ë©”ì†Œë“œ ë˜í•œ 2ê°œë¥¼ ì‘ì„±í•œë‹¤.
+	//updateì¿¼ë¦¬ì—ëŠ” originbidxì™€ depthë¥¼ ë°›ëŠ” ì¿¼ë¦¬ë¬¸
 	//public int boardReplyUpdate(int originbidx, int depth);
 	
 	public int boardReplyUpdate(HashMap<String,Integer> hm);

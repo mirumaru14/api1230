@@ -22,22 +22,22 @@ public class UploadFileUtiles {
 									String originalName,byte[] fileData	)	
 	throws Exception{
 		
-		UUID uid = UUID.randomUUID();		//ÆÄÀÏ¸í ¾Õ¿¡ ³­¼öµéÀÌ »ı¼º. ÀÌ¹ÌÁö´Â ¼¶³×ÀÏÆÄÀÏÀÌ Ãß°¡·Î»ı¼º. s-
+		UUID uid = UUID.randomUUID();		//íŒŒì¼ëª… ì•ì— ë‚œìˆ˜ë“¤ì´ ìƒì„±. ì´ë¯¸ì§€ëŠ” ì„¬ë„¤ì¼íŒŒì¼ì´ ì¶”ê°€ë¡œ ìƒì„±. ì•ì— s-ê°€ ë¶™ìŒ
 		String savedName = uid.toString() +"_"+originalName;	
 		
 //		String path = UploadFileUtiles.class.getResource("").getPath();
-//		System.out.println("ÇöÀçÅ¬·¡½ºpath:"+path);
+//		System.out.println("í˜„ì¬í´ë˜ìŠ¤path:"+path);
 		
-//  	½ÇÇàµÇ´Â ½Ã½ºÅÛ À§Ä¡	
+//  	ì‹¤í–‰ë˜ëŠ” ì‹œìŠ¤í…œ ìœ„ì¹˜
 //		System.out.println(System.getProperty("user.dir"));
        
-//        String realpath = request.getSession().getServletContext().getRealPath(uploadPath);
+//     	String realpath = request.getSession().getServletContext().getRealPath(uploadPath);
 //		System.out.println("realpath:"+realpath);
         
 		String savedPath = calcPath(uploadPath);
 		
 		File target = new File(uploadPath+savedPath,savedName);
-//  	µî·ÏÇÑ ÆÄÀÏ »ó´ë°æ·Î
+//  	ë“±ë¡í•œ íŒŒì¼ ìƒëŒ€ê²½ë¡œ
 //		String loc = target.getCanonicalPath();
 
 		FileCopyUtils.copy(fileData,target);
@@ -126,7 +126,7 @@ public class UploadFileUtiles {
 	
 	//	System.out.println("destImg"+destImg);
 		boolean flag = ImageIO.write(destImg, formatName.toUpperCase(), newFile);
-		System.out.println("º¹»ç¿©ºÎ flag"+flag);
+		System.out.println("ë³µì‚¬ì—¬ë¶€ flag"+flag);
 		return thumbnailName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	}	
 }

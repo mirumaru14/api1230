@@ -12,10 +12,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-		//ÇÚµé·¯ (memberLoginAction)°¡ ½ÇÇàµÈ ÀÌÈÄ ÀÌ ÀÎÅÍ¼ÁÅÍ°¡ È£Ãâ.		
+		//í•¸ë“¤ëŸ¬ (memberLoginAction)ê°€ ì‹¤í–‰ëœ ì´í›„ ì´ ì¸í„°ì…‰í„°ê°€ í˜¸ì¶œ		
 		
-		//controller¿¡¼­ rttrÀ» ÅëÇØ ¸ğµ¨¿¡ midx¿Í ÀÌ¸§ÀÌ ´ã°ÜÀÖ´Ù.
-		//ÀÌµéÀ» ÃßÃâÇØ¼­ ´Ù½Ã ¼¼¼Ç¿¡ ´ã´Â °úÁ¤.
+		//controllerì—ì„œ rttrì„ í†µí•´ ëª¨ë¸ì— midxì™€ ì´ë¦„ì´ ë‹´ê²¨ìˆë‹¤.
+		//ì´ë“¤ã…‡ë¥´ ì¶”ì¶œí•´ì„œ ë‹¤ì‹œ ì„¸ì…˜ì— ë‹´ëŠ” ê³¼ì •.
 		Object midx = modelAndView.getModel().get("midx");
 		Object memberName = modelAndView.getModel().get("memberName");
 		
@@ -24,16 +24,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			request.getSession().setAttribute("memberName", memberName);		
 		}
 		
-		//¼¼¼Ç¿¡ midx, memberNameÀ» ¼¼ÆÃÇÑ µÚ view°¡ »ı¼ºµÊ. view´Â ÇÚµé·¯¿¡¼­ ¼³Á¤Çß´ø °æ·Î
+		//ì„¸ì…˜ì— midx, memberNameì„ ì„¸íŒ…í•œ ë’¤ viewê°€ ìƒì„±ë¨. viewëŠ” í•¸ë“¤ëŸ¬ì—ì„œ ì„¤ì •í–ˆë˜ ê²½ë¡œ
 	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		//·Î±×ÀÎÀ» ÇÏ±â Àü ½ÇÇàµÇ¾ßÇÒ ºÎºĞ. Áï, ¼¼¼ÇÃÊ±âÈ­.
+		//ë¡œê·¸ì¸ì„ í•˜ê¸° ì „ ì‹¤í–‰ë˜ì•¼í•  ë¶€ë¶„. ì¦‰, ì„¸ì…˜ì´ˆê¸°í™”
 		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("midx") != null) { //¼¼¼ÇÀÌ Á¸ÀçÇÒ ½Ã, ÃÊ±âÈ­
+		if(session.getAttribute("midx") != null) { //ì„¸ì…˜ì´ ì¡´ì¬í•  ì‹œ, ì´ˆê¸°í™”
 			session.removeAttribute("midx");
 			session.removeAttribute("memberName");
 			session.invalidate();			

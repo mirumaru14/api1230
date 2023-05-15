@@ -9,20 +9,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter{
-		//AuthInterceptor ±ÇÇÑ È®ÀÎÇÏ´Â ÀÎÅÍ¼ÁÅÍ
+		//AuthInterceptor ê¶Œí•œ í™•ì¸í•˜ëŠ” ì¸í„°ì…‰í„°
 	
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		//ÇÚµé·¯°¡ ½ÇÇàµÇ±âÀü¿¡ µ¿ÀÛÇÏ´Â ÀÎÅÍ¼ÁÅÍ.
+		//í•¸ë“¤ëŸ¬ê°€ ì‹¤í–‰ë˜ê¸°ì „ì— ë™ì‘í•˜ëŠ” ì¸í„°ì…‰í„°.
 		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("midx")==null) {	//·Î±×ÀÎ ÇÏÁö ¾Ê¾ÒÀ» ½Ã
-			//·Î±×ÀÎ ÈÄ ÀÌµ¿ÇÒ ÁÖ¼Ò¸¦ ´ãÀ½.
+		if(session.getAttribute("midx")==null) {	//ë¡œê·¸ì¸ í•˜ì§€ ì•Šì•˜ì„ ì‹œ
+			//ë¡œê·¸ì¸ í›„ ì´ë™í•  ì£¼ì†Œë¥¼ ë‹´ìŒ.
 			saveDest(request);
 			
-			//ÁÖ¼Ò¸¦ ´ãÀº µÚ, ·Î±×ÀÎÃ¢À¸·Î ÀÌµ¿.
+			//ì£¼ì†Œë¥¼ ë‹´ì€ ë’¤, ë¡œê·¸ì¸ì°½ìœ¼ë¡œ ì´ë™.
 			response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
 		}
 		
@@ -30,25 +30,25 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	}
 	
 	private void saveDest(HttpServletRequest request) {
-		//±ÇÇÑ¾øÀ½(·Î±×ÀÎ¾ÈÇÔ)À¸·Î ÀÎÇØ °­Á¦·Î ´Ù¸¥°æ·Î(·Î±×ÀÎÃ¢)·Î ÀÌµ¿µÈ °æ¿ì, 
-		//±ÇÇÑÀÌ »ı±äµÚ(·Î±×ÀÎ ÈÄ) ´Ù½Ã ÀÌµ¿µÇ±â ÀüÀÇ °æ·Î·Î ÀÌµ¿ÇØ¾ßÇÑ´Ù.
-		//ÀÌ ÀÌµ¿ÇÏ±â ÀüÀÇ °æ·Î¸¦ ÀúÀåÇÏ±â À§ÇÑ ¸Ş¼Òµå
+		//ê¶Œí•œì—†ìŒ(ë¡œê·¸ì¸ì•ˆí•¨)ìœ¼ë¡œ ì¸í•´ ê°•ì œë¡œ ë‹¤ë¥¸ê²½ë¡œ(ë¡œê·¸ì¸ì°½)ë¡œ ì´ë™ëœ ê²½ìš°,
+		//ê¶Œí•œì´ ìƒê¸´ ë’¤(ë¡œê·¸ì¸ í›„)ë‹¤ì‹œ ì´ë™ë˜ê¸° ì „ì˜ ê²½ë¡œë¡œ ì´ë™í•´ì•¼ í•œë‹¤.
+		//ì´ ì´ë™í•˜ê¸° ì „ì˜ ê²½ë¡œë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ ë©”ì†Œë“œ
 		
 		String root = request.getContextPath();
 		root.length();
 		
-		String uri = request.getRequestURI().substring(root.length());	//contextpath¸¦ Á¦¿Ü.
+		String uri = request.getRequestURI().substring(root.length());	//contextpathë¥¼ ì œì™¸.
 		String query = request.getQueryString();
 		
 		if(query == null || query.equals("null")) {
 			query = "";				
 		}else {
-			query = "?"+query;		//uri+query°¡ ÀÌµ¿ÇÒ °æ·Î. query´Â bidx, originbidxµî
+			query = "?"+query;		//uri+queryê°€ ì´ë™í•  ê²½ë¡œ. queryëŠ” bidx, originbidxë“±
 		}
 		
-		if(request.getMethod().equals("GET")) {	//urlÀ» º¸³»´Â¹æ½Ä
+		if(request.getMethod().equals("GET")) {	//urlì„ ë³´ë‚´ëŠ” ë°©ì‹
 			request.getSession().setAttribute("dest", uri+query);
-			//¼¼¼Ç¿¡ dest¶ó´Â ÀÌ¸§À¸·Î °æ·ÎÀúÀå.
+			//ì„¸ì…˜ì— destë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ê²½ë¡œì €ì¥.
 		}
 		
 	}

@@ -11,10 +11,10 @@ import com.myezen.myapp.persistance.MemberService_Mapper;
 
 @Service("memberServiceImpl")
 public class MemberServiceImpl implements MemberService{
-	//add unimplements method : ¾ÆÁ÷ ±¸ÇöÇÏÁö ¾ÊÀº ¸Ş¼Òµå¸¦ Ãß°¡. ( ÀÚµ¿À¸·Î ÀÎÅÍÆäÀÌ½º ¸Ş¼Òµå¸¦ ¾Æ·¡¿¡ Ãß°¡½ÃÅ´ )
+	//add unimplements method : ì•„ì§ êµ¬í˜„í•˜ì§€ ì•Šì€ ë©”ì†Œë“œë¥¼ ì¶”ê°€. (ìë™ìœ¼ë¡œ ì¸í„°í˜ì´ìŠ¤ ë©”ì†Œë“œë¥¼ ì•„ë˜ì— ì¶”ê°€ì‹œí‚´)
 		
-	//ÀÚµ¿À¸·Î mybatis¿Í ¿¬µ¿ÇÏ°í
-	//¸Ş¼Òµå¸¶´Ù Ãß°¡ÇÒ ÇÊ¿ä¾øÀÌ ¸â¹öº¯¼ö·Î
+	//ìë™ìœ¼ë¡œ mybatisì™€ ì—°ë™í•˜ê³ 
+	//ë©”ì†Œë“œë§ˆë‹¤ ì¶”ê°€í•  í•„ìš”ì—†ì´ ë©¤ë²„ë³€ìˆ˜ë¡œ ì‚¬ìš©
 	private MemberService_Mapper msm;
 	@Autowired
 		public MemberServiceImpl(SqlSession sqlSession) {
@@ -22,16 +22,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	/*
-	//mybatis¿Í ¿¬µ¿
+	//mybatisì™€ ì—°ë™
 	@Autowired
-	SqlSession sqlSession;		//SqlSessionÅ¬·¡½º´Â mybatis¿¡ ¼ÓÇØÀÖ´Ù. importÇÊ¿ä (mybtis = ibtis. È¸»çÀÎ¼ö¹®Á¦)
+	SqlSession sqlSession;		//SqlSessioní´ë˜ìŠ¤ëŠ” mybatisì— ì†í•´ìˆë‹¤. importí•„ìš” (mybatis = ibatis. íšŒì‚¬ì¸ìˆ˜ë¬¸ì œ)
 	*/
-	@Override				//ÀÎÅÍÆäÀÌ½º ¸Ş¼Òµå¸¦ ±¸Çö
+	
+	
+	@Override				//ì¸í„°í˜ì´ìŠ¤ ë©”ì†Œë“œë¥¼ êµ¬í˜„
 	public int memberInsert(String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberEmail, String memberGender, String memberAddr, String memberBirth) {
 		
-		MemberVo mv = new MemberVo();		//MemberVo´Â °´Ã¼»ı¼º
-		mv.setMemberid(memberId);			//ÀÌºÎºĞÀº ÀÚ¹Ù¿Í µ¿ÀÏ
+		MemberVo mv = new MemberVo();		//MemberVoëŠ” ê°ì²´ìƒì„±
+		mv.setMemberid(memberId);			//ì´ ë¶€ë¶„ì€ ìë°”ì™€ ë™ì¼
 		mv.setMemberpwd(memberPwd);
 		mv.setMembername(memberName);
 		mv.setMemberphone(memberPhone);
@@ -41,7 +43,7 @@ public class MemberServiceImpl implements MemberService{
 		mv.setMemberbirth(memberBirth);
 				
 		
-		//persistanceÆĞÅ°Áö¿¡ ÀÖ´Â MemberService_Mapper¿Í ¿¬µ¿		
+		//persistanceíŒ¨í‚¤ì§€ì— ìˆëŠ” memberService_Mapperì™€ ì—°ë™	
 		int value = msm.memberInsert(mv);
 		
 		return value;

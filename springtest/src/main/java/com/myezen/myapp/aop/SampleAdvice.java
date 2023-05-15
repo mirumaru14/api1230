@@ -6,26 +6,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component //ÀÌ Å¬·¡½º¸¦ BeanÀ¸·Î µî·Ï
-@Aspect	//ÇÁ·Ï½Ã »ı¼º±â°¡ ÀÌ ¾î³ëÅ×ÀÌ¼Ç(@Aspect)¸¦ Ã£¾Æ¼­ ÀÌ Å¬·¡½º¸¦ ¾îµå¹ÙÀÌÀú·Î ¸¸µé¾îÁÜ.
+@Component //ì´ í´ë˜ìŠ¤ë¥¼ Beanìœ¼ë¡œ ë“±ë¡
+@Aspect	//í”„ë¡ì‹œ ìƒì„±ê¸°ê°€ ì´ ì–´ë…¸í…Œì´ì…˜(@Aspect)ë¥¼ ì°¾ì•„ì„œ ì´ í´ë˜ìŠ¤ë¥¼ ì–´ë“œë°”ì´ì €ë¡œ ë§Œë“¤ì–´ì¤Œ.
 //Aspect = Advice + PoinCut.
-//¾Æ·¡ÀÇ Å¬·¡½º´Â ºÎ°¡±â´ÉÀÌ¸ç, ±× ºÎ°¡±â´ÉÀ» Á¤ÀÇÇÑ ÄÚµå°¡ Advice.
-//ÀÌ ¾îµå¹ÙÀÌ½º¸¦ ¾îµğ¿¡ Àû¿ëÇÒÁö °áÁ¤ÇÏ´Â°ÍÀÌ PointCut. Áï ¾î¶²±â´ÉÀ» ¾îµğ¿¡ Àû¿ëÇÒÁö °áÁ¤µÇ¾ú´Ù´Â ¶æÀÓ.
+//ì•„ë˜ì˜ í´ë˜ìŠ¤ëŠ” ë¶€ê°€ê¸°ëŠ¥ì´ë©°, ê·¸ ë¶€ê°€ê¸°ëŠ¥ì„ ì •ì˜í•œ ì½”ë“œê°€ Advice.
+//ì´ ì–´ë“œë°”ì´ìŠ¤ë¥¼ ì–´ë””ì— ì ìš©í• ì§€ ê²°ì •í•˜ëŠ”ê²ƒì´ PointCut. ì¦‰ ì–´ë–¤ê¸°ëŠ¥ì„ ì–´ë””ì— ì ìš©í• ì§€ ê²°ì •ë˜ì—ˆë‹¤ëŠ” ëœ»ì„
 public class SampleAdvice {
 	
-	//LoggerÅ¸ÀÔÀº org.slf4j.Logger ¸¦ ÀÓÆ÷Æ®	
+	//Loggeríƒ€ì…ì€ org.slf4j.Loggerë¥¼ ì„í¬íŠ¸
 	private static final Logger logger=LoggerFactory.getLogger(SampleAdvice.class);
 		
 	
-	@Before("execution(* com.myezen.myapp.service.BoardService*.*(..))")	//aspectj ¹®¹ıÀ» »ç¿ë 
-	//@Before´Â PointCut. ÀÌ ±â´ÉÀÌ ¾ğÁ¦ Àû¿ëµÉÁö ¾Ë·ÁÁÜ. Àû¿ëµÇ´Â À§Ä¡´Â aspectj¹®¹ıÀ¸·Î ÀÛ¼ºµÇ¾ú´Ù.
-	//BoardService·Î ½ÃÀÛÇÏ´Â ¸ğµç °´Ã¼
+	@Before("execution(* com.myezen.myapp.service.BoardService*.*(..))")	//aspectj ë¬¸ë²•ì„ ì‚¬ìš©
+	//@Beforeï¿½ï¿½ PointCut. ì´ ê¸°ëŠ¥ì´ ì–¸ì œ ì ìš©ë ì§€ ì•Œë ¤ì¤Œ. ì ìš©ë˜ëŠ” ìœ„ì¹˜ëŠ” aspectjë¬¸ë²•ìœ¼ë¡œ ì‘ì„±ë˜ì—ˆë‹¤.
+	//BoardServiceë¡œ ì‹œì‘í•˜ëŠ” ëª¨ë“  ê°ì²´
 	public void startLog() {
-		//BoardServiceÀÇ °´Ã¼°¡ ½ÇÇàµÉ¶§¸¶´Ù ±× °´Ã¼ÀÌÀü¿¡ ÀÌ ¸Ş¼Òµå°¡ ¸ÕÀú½ÇÇàµÊ?
+		//BoardServiceì˜ ê°ì²´ê°€ ì‹¤í–‰ë ë•Œë§ˆë‹¤ ê·¸ ê°ì²´ ì´ì „ì— ì´ ë©”ì†Œë“œê°€ ë¨¼ì € ì‹¤í–‰ë¨?
 		
 		logger.info("-----------------------");
-		logger.info("aop ·Î±×Å×½ºÆ®ÁßÀÔ´Ï´Ù.");
+		logger.info("aop ë¡œê·¸í…ŒìŠ¤íŠ¸ì¤‘ì…ë‹ˆë‹¤.");
 		logger.info("-----------------------");
-		System.out.println("sysout ÀÔ´Ï´Ù.");
+		System.out.println("sysout ì…ë‹ˆë‹¤.");
 	}
 }

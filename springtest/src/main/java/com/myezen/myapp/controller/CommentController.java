@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myezen.myapp.domain.CommentVo;
 import com.myezen.myapp.service.CommentService;
 
-@RestController		//@Controller¿Í @ResponseBody¸¦ Æ÷ÇÔ
+@RestController		//@Controllerì™€ @ResponseBodyë¥¼ í¬í•¨
 @RequestMapping(value="/comment")
 public class CommentController {
 	
@@ -35,7 +35,7 @@ public class CommentController {
 		
 		
 		int value = cs.commentInsert(cv);
-		System.out.println("ÀÔ·Â¿©ºÎ"+value);
+		System.out.println("ì…ë ¥ì—¬ë¶€"+value);
 		
 		JSONObject js = new JSONObject();
 		js.put("value", value);
@@ -45,18 +45,18 @@ public class CommentController {
 	
 	@RequestMapping(value="/{bidx}/{nextBlock}/commentList.do", method=RequestMethod.GET)
 	public JSONObject commentList(
-			@PathVariable("bidx") int bidx,	//url¿¡ ÀÖ´Â bidx¸¦ ÃßÃâ
+			@PathVariable("bidx") int bidx,	//urlì— ìˆëŠ” bidxë¥¼ ì¶”ì¶œ
 			@PathVariable("nextBlock") int nextBlock
 			) {
 		
 		JSONObject js = new JSONObject();		
 		ArrayList<CommentVo> alist = cs.commentSelectAll(bidx, nextBlock);	
-		int totalCnt = cs.commentTotalCnt(bidx);	//°Ô½Ã±Û¿¡ ´Ş¸° ´ñ±ÛÀÇ ÃÑ °³¼ö
+		int totalCnt = cs.commentTotalCnt(bidx);	//ê²Œì‹œê¸€ì— ë‹¬ë¦° ëŒ“ê¸€ì˜ ì´ ê°œìˆ˜
 		
-		String moreView = "N";		//´õº¸±â¹öÆ° º¸ÀÌ´Â¿©ºÎ
+		String moreView = "N";		//ë”ë³´ê¸°ë²„íŠ¼ ë³´ì´ëŠ” ì—¬ë¶€
 		
 		if(totalCnt > nextBlock*15) {
-			moreView = "Y";			//´ñ±ÛÀÌ 15°³ÀÌ»óÀÌ¸é ´õº¸±â¹öÆ° È°¼ºÈ­
+			moreView = "Y";			//ëŒ“ê¸€ì´ 15ê°œ ì´ìƒì´ë©´ ë”ë³´ê¸°ë²„íŠ¼ í™œì„±í™”
 		}
 		
 		js.put("alist", alist);
@@ -68,7 +68,7 @@ public class CommentController {
 	@RequestMapping(value="/{bidx}/{nextBlock}/more.do", method=RequestMethod.GET)
 	public JSONObject more(
 			@PathVariable("bidx") int bidx,	
-			@PathVariable("nextBlock") int nextBlock	//ÀÌ °æ·Î·Î´Â nextBlockÀÌ Ã³À½¿£ 2·Î ³Ñ¾î¿È.		
+			@PathVariable("nextBlock") int nextBlock	//ì´ ê²½ë¡œë¡œëŠ” nextBlockì´ ì²˜ìŒì—” 2ë¡œ ë„˜ì–´ì˜´.		
 			) {
 				
 		JSONObject js = new JSONObject();
